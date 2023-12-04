@@ -81,7 +81,8 @@ def format_clip(input_video, output_video,
         facecam_clip = crop(og_clip_resized, x1=facecamxy[0], y1=facecamxy[1], x2=facecamxy[2], y2=facecamxy[3])
         facecam_clip_resized = facecam_clip.resize(width=1080, height=608)
         # Create a clips array with Facecam and POV clips, Facecam on top
-        base_video = clips_array([[facecam_clip_resized], [pov_clip_resized]])
+        base_video = CompositeVideoClip([pov_clip_resized.set_position(("center", "bottom")),
+                           facecam_clip_resized.set_position(("center", "top"))], size=(1080, 1920))
     else:
         # Crop clip for background canvas
         bg_clip = crop(og_clip_resized, x_center=960, y_center=540, width=608, height=1080)
