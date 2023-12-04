@@ -5,6 +5,8 @@ vertically for viewing on tiktok/youtube shorts/facebook reels, etc
 
 ## Installation
 
+Clone the repo
+
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the requirements.
 
 ```bash
