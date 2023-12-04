@@ -23,3 +23,6 @@ If you would like to try with a different game, select `N/A` from the dropdown. 
 visible if they are applicable (i.e. checking HUD elements when game is set to "N/A" will return no HUD elements).
 
 To remap Facecam location, clear the `facecamxy` value from the ini file and run the program
+
+cx_freeze is installed in order to package this into an exe but 
+I have not figured that out yet
