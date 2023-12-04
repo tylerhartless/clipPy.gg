@@ -24,8 +24,7 @@ apexkills = getCoordinates(config['Settings']['apexkills'])
 apexweapon = getCoordinates(config['Settings']['apexweapon'])
 
 
-# Currently utilizes elif statements to determine which game's hud element to use,
-# there is most likely a cleaner solution
+# Currently utilizes elif statements to determine which game's hud element to use, there is most likely a cleaner solution
 def hud_selector(
         health, squads, dmg, weapon,
         health_hud, placement_hud, killsdmg_hud, weapon_hud,
