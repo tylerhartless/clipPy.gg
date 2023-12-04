@@ -41,7 +41,6 @@ def map_facecam(input_video):
 
     plt.imshow(screenshot)
 
-    # drawtype is 'box' or 'line' or 'none'
     rs = RectangleSelector(current_ax, line_select_callback,
                             useblit=True,
                             button=[1, 3],  # don't use middle button
