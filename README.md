@@ -19,7 +19,7 @@ python main.py
 ```
 
 Currently only works (properly) with Apex Legends clips as the HUD elements for other games needs to be masked.
-If you would like to try with a different game, select `N/A` from the dropdown. Checked HUD elements will only be 
+If you would like to try with a different game, select `N/A` from the dropdown and the program will only composite your Facecam and game POV. Checked HUD elements will only be 
 visible if they are applicable (i.e. checking HUD elements when game is set to "N/A" will return no HUD elements).
 
 To remap Facecam location, clear the `facecamxy` value from the ini file and run the program
