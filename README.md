@@ -1,6 +1,6 @@
 # clipPy.gg
 
-Foobar is a Python program for compositing gaming/stream clips vertically for viewing on tiktok/youtube shorts/facebook reels, etc 
+clipPy.gg is a Python program for compositing gaming/stream clips vertically for viewing on tiktok/youtube shorts/facebook reels, etc 
 
 ## Installation
 
@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-To run clipPy.gg, simply run this in the command line in the program directory
+To start clipPy.gg, run this in the command line in the program directory
 ```bash
 python main.py
 ```
