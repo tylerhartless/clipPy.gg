@@ -57,7 +57,7 @@ facecamxy = get_coordinates(config['Settings']['facecamxy'])
 
 # Returns a blurred version of the video for background canvas
 def blur(image):
-    return gaussian(image.astype(float), sigma=4.5)
+    return gaussian(image.astype(float), sigma=5)
 
 
 def format_clip(input_video, output_video,
@@ -76,19 +76,20 @@ def format_clip(input_video, output_video,
     pov_clip = crop(og_clip_resized, x_center=960, y_center=540, width=889, height=1080)
     pov_clip_resized = pov_clip.resize(width=1080, height=1312)
 
+    # Crop clip for background canvas
+    bg_clip = crop(og_clip_resized, x_center=960, y_center=540, width=608, height=1080)
+    # Blur and resize background clip
+    bg_clip_blurred = bg_clip.fl_image(blur)
+    final_bg = bg_clip_blurred.resize(width=1080, height=1920)
+
     if facecam_enabled is True:
         # Crop Facecam clip using tuple extracted from config, then resize
         facecam_clip = crop(og_clip_resized, x1=facecamxy[0], y1=facecamxy[1], x2=facecamxy[2], y2=facecamxy[3])
         facecam_clip_resized = facecam_clip.resize(width=1080, height=608)
         # Create a clips array with Facecam and POV clips, Facecam on top
-        base_video = CompositeVideoClip([pov_clip_resized.set_position(("center", "bottom")),
-                           facecam_clip_resized.set_position(("center", "top"))], size=(1080, 1920))
+        base_video = CompositeVideoClip([final_bg, pov_clip_resized.set_position(("center", "bottom")),
+                           facecam_clip_resized.set_position(("center", "top"))], size=(1080, 1920), use_bgclip=True)
     else:
-        # Crop clip for background canvas
-        bg_clip = crop(og_clip_resized, x_center=960, y_center=540, width=608, height=1080)
-        # Blur and resize background clip
-        bg_clip_blurred = bg_clip.fl_image(blur)
-        final_bg = bg_clip_blurred.resize(width=1080, height=1920)
         # Composite pov clip on top of blurred background
         base_video = CompositeVideoClip([final_bg, pov_clip_resized.set_position("center")])
 
