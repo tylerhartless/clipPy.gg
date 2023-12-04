@@ -148,7 +148,6 @@ class VideoEditorGUI:
             current_output_dir = values.get("output_dir", "")
             if current_output_dir != self.last_output_dir:
                 self.last_output_dir = current_output_dir
-                self.save_config()
 
             elif event == "Process Queue" and not processing_event_triggered and len(self.video_queue) != 0:
                 self.process_queue()
