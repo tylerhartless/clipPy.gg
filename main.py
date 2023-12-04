@@ -16,7 +16,7 @@ class VideoEditorGUI:
         self.config = ConfigParser()
         self.load_config()
         self.layout = [
-            [sg.Text("Select Game (if applicable):"),
+            [sg.Text("Select Game (or N/A if game is not listed):"),
              sg.Combo(['Apex', 'Warzone', 'N/A'], default_value='Apex', key='selected_game')],
             [sg.Text("Select Elements To Include:")],
             [sg.Checkbox("Facecam", True, key='facecam'),
