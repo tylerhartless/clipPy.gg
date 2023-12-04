@@ -1,5 +1,9 @@
 import os
 
+
+# I want to move the queue functions away from the GUI, this is not wired up or functional yet
+
+
 def update_queue_display(window, video_queue):
     filenames = [os.path.basename(item) for item in video_queue]
     window["queue_display"].update(values=filenames)

@@ -8,6 +8,8 @@ import configparser
 import re
 
 
+# Logger function to display progress in UI
+
 class MyBarLogger(ProgressBarLogger):
     def __init__(self, window):
         super().__init__()

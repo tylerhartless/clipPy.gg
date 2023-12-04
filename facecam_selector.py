@@ -3,10 +3,12 @@ from matplotlib.widgets import RectangleSelector, Button
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
+# Initialize global variables for events
 coords = None
 confirmed = False
 
 def map_facecam(input_video):
+    global coords, confirmed
     mpl.rcParams['toolbar'] = 'None'
     og_clip = VideoFileClip(input_video)
     screenshot = og_clip.get_frame(2)
@@ -22,15 +24,6 @@ def map_facecam(input_video):
         global coords
         coords = [x1, y1, x2, y2]
 
-    def toggle_selector(event):
-        print(' Key pressed.')
-        if event.key in ['Q', 'q'] and toggle_selector.RS.active:
-            print(' RectangleSelector deactivated.')
-            toggle_selector.RS.set_active(False)
-        if event.key in ['A', 'a'] and not toggle_selector.RS.active:
-            print(' RectangleSelector activated.')
-            toggle_selector.RS.set_active(True)
-
     def on_confirm_button_clicked(event):
         global coords, confirmed
         confirmed = True
@@ -44,19 +37,18 @@ def map_facecam(input_video):
         plt.close()  # Close the window
         return coords  # Return None when the window is closed without confirming
 
-
     fig, current_ax = plt.subplots()
 
     plt.imshow(screenshot)
 
     # drawtype is 'box' or 'line' or 'none'
-    toggle_selector.RS = RectangleSelector(current_ax, line_select_callback,
-                                           useblit=True,
-                                           button=[1, 3],  # don't use middle button
-                                           minspanx=5, minspany=5,
-                                           spancoords='pixels',
-                                           interactive=True)
-    plt.connect('key_press_event', toggle_selector)
+    rs = RectangleSelector(current_ax, line_select_callback,
+                            useblit=True,
+                            button=[1, 3],  # don't use middle button
+                            minspanx=5, minspany=5,
+                            spancoords='pixels',
+                            interactive=True)
+
     plt.connect('close_event', on_close)
 
     plt.tick_params(left=False, bottom=False, labelleft=False, labelbottom=False)

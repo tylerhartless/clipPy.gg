@@ -2,6 +2,9 @@ from moviepy.editor import ImageClip
 from moviepy.video.fx.all import crop, resize
 
 
+# wz mask needs to be created and cropped accordingly, same for any other future compatible games
+
+
 def game_health_bar(game, og_clip):
     match game:
         case "Apex":

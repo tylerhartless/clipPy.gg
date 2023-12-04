@@ -16,6 +16,7 @@ def getCoordinates(text):
         coords = tuple(int(x) for x in match.groups())
         return coords
 
+# Any future HUD elements will be imported here from the ini
 
 apexhealth = getCoordinates(config['Settings']['apexhealth'])
 apexplacement = getCoordinates(config['Settings']['apexplacement'])
