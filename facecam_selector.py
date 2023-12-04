@@ -11,7 +11,8 @@ def map_facecam(input_video):
     global coords, confirmed
     mpl.rcParams['toolbar'] = 'None'
     og_clip = VideoFileClip(input_video)
-    screenshot = og_clip.get_frame(2)
+    og_clip_resized = og_clip.resize(width=1920, height=1080)
+    screenshot = og_clip_resized.get_frame(2)
 
     def line_select_callback(eclick, erelease):
         # eclick and erelease are the press and release events
