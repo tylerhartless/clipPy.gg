@@ -26,7 +26,7 @@ class VideoEditorGUI:
              sg.Checkbox("Weapon", False, key='weapon')],
             [sg.Text("Output Directory:")],
             [sg.Input(size=(43, 1), key="output_dir", default_text=self.last_output_dir), sg.FolderBrowse()],
-            [sg.Text("Add File to Queue:")],
+            [sg.Text("Add Clip to Queue:")],
             [sg.Input(size=(43, 1), key="input_file", enable_events=True), sg.FileBrowse()],
             [sg.Listbox(values=[], size=(50, 3), key="queue_display", select_mode=sg.LISTBOX_SELECT_MODE_EXTENDED)],
             [sg.Button("Remove from Queue"), sg.Button("Process Queue")],
