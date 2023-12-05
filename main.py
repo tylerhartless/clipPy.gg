@@ -148,6 +148,7 @@ class VideoEditorGUI:
             current_output_dir = values.get("output_dir", "")
             if current_output_dir != self.last_output_dir:
                 self.last_output_dir = current_output_dir
+               # self.save_config() need to figure out an error this throws
 
             elif event == "Process Queue":
                 if not processing_event_triggered and len(self.video_queue) != 0:
@@ -218,6 +219,8 @@ class VideoEditorGUI:
                 sg.popup("Video processing completed!", title="Success")
                 self.video_queue = []
                 self.update_queue_display()
+                self.window["progress_bar"].update(current_count=0)
+                self.window["progress_percent"].update("")
                 processing_event_triggered = False  # Reset the flag after processing
 
         self.window.close()
