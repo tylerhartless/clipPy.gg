@@ -141,7 +141,8 @@ class VideoEditorGUI:
         while True:
             event, values = self.window.read(timeout=100)
 
-            if event == sg.WINDOW_CLOSED:
+            if if (event == sg.WINDOW_CLOSE_ATTEMPTED_EVENT) and 
+                sg.popup_yes_no('Process queue is running. Are you sure?') == 'Yes':
                 self.save_config()
                 break
 
