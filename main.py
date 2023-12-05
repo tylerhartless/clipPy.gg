@@ -149,33 +149,40 @@ class VideoEditorGUI:
             if current_output_dir != self.last_output_dir:
                 self.last_output_dir = current_output_dir
 
-            elif event == "Process Queue" and not processing_event_triggered and len(self.video_queue) != 0:
-                self.process_queue()
-                processing_event_triggered = True  # Set the flag to avoid repeated event triggers
+            elif event == "Process Queue":
+                if not processing_event_triggered and len(self.video_queue) != 0:
+                    self.process_queue()
+                    processing_event_triggered = True  # Set the flag to avoid repeated event triggers
 
-            elif event == "Process Queue" and len(self.video_queue) == 0:
-                sg.popup_ok("Please add files to queue before processing.", background_color="firebrick4", no_titlebar=True)
+                elif len(self.video_queue) == 0:
+                    sg.popup_ok("Please add files to queue before processing.", background_color="firebrick4",
+                                no_titlebar=True)
 
-            elif event == "Process Queue" and processing_event_triggered:
-                sg.popup_ok("Please wait until current queue is done processing.", background_color="firebrick4", no_titlebar=True)
+                elif processing_event_triggered:
+                    sg.popup_ok("Please wait until the current queue is done processing.",
+                                background_color="firebrick4", no_titlebar=True)
 
-            elif event == "Remove from Queue" and not processing_event_triggered:
-                self.remove_from_queue(values)
+            elif event == "Remove from Queue":
+                if not processing_event_triggered:
+                    self.remove_from_queue(values)
+                elif processing_event_triggered:
+                    sg.popup_ok("Please wait until the current queue is done processing.",
+                                background_color="firebrick4", no_titlebar=True)
 
-            elif event == "Remove from Queue" and processing_event_triggered:
-                sg.popup_ok("Please wait until current queue is done processing.", background_color="firebrick4", no_titlebar=True)
-
-            elif event == "input_file" and not processing_event_triggered:
-                input_file = values["input_file"]
-                if input_file:
-                    self.add_to_queue(input_file)
-
-            elif event == "input_file" and processing_event_triggered:
-                sg.popup_ok("Please wait until current queue is done processing.", background_color="firebrick4", no_titlebar=True)
+            elif event == "input_file":
+                if not processing_event_triggered:
+                    input_file = values["input_file"]
+                    if input_file:
+                        self.add_to_queue(input_file)
+                elif processing_event_triggered:
+                    sg.popup_ok("Please wait until the current queue is done processing.",
+                                background_color="firebrick4", no_titlebar=True)
 
             elif event == '-FACECAM_LOCATION_NEEDED-':
-                processing_event_triggered = False  # Reset the flag so user can process after mapping facecam
-                facecam_warning = sg.popup_yes_no("Do you have a Facecam?", "(if yes, program will restart once Facecam is selected)", no_titlebar=True, background_color="DarkOrchid4")
+                processing_event_triggered = False  # Reset the flag so the user can process after mapping facecam
+                facecam_warning = sg.popup_yes_no("Do you have a Facecam?",
+                                                  "(if yes, program will restart once Facecam is selected)",
+                                                  no_titlebar=True, background_color="DarkOrchid4")
 
                 if facecam_warning == 'Yes':
                     input_file = values["input_file"]
@@ -191,12 +198,10 @@ class VideoEditorGUI:
                     elif coords_arr is None:
                         self.window.Refresh()
 
-
                 elif facecam_warning == 'No':
                     self.window['facecam'].update(False)
                     self.process_queue()
                     processing_event_triggered = True
-
 
             elif event == '-UPDATE_CURRENT_CLIP-':
                 i, total, base_name = values[event]
